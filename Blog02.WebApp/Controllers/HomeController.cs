@@ -11,6 +11,8 @@ namespace Blog02.WebApp.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            MyBlogSite.BusinessLayer.Test test = new MyBlogSite.BusinessLayer.Test();
+
             return View();
         }
     }

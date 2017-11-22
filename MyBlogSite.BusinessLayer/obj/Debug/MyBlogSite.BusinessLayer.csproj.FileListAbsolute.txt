@@ -1,0 +1,16 @@
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.BusinessLayer\bin\Debug\MyBlogSite.BusinessLayer.dll.config
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.BusinessLayer\bin\Debug\MyBlogSite.BusinessLayer.dll
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.BusinessLayer\bin\Debug\MyBlogSite.BusinessLayer.pdb
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.BusinessLayer\bin\Debug\EntityFramework.dll
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.BusinessLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.BusinessLayer\bin\Debug\MyBlogSite.DataAccessLayer.dll
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.BusinessLayer\bin\Debug\MyBlogSite.Entities.dll
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.BusinessLayer\bin\Debug\MyBlogSite.DataAccessLayer.pdb
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.BusinessLayer\bin\Debug\MyBlogSite.DataAccessLayer.dll.config
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.BusinessLayer\bin\Debug\MyBlogSite.Entities.pdb
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.BusinessLayer\bin\Debug\EntityFramework.xml
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.BusinessLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.BusinessLayer\obj\Debug\MyBlogSite.BusinessLayer.csprojResolveAssemblyReference.cache
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.BusinessLayer\obj\Debug\MyBlogSite.BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.BusinessLayer\obj\Debug\MyBlogSite.BusinessLayer.dll
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.BusinessLayer\obj\Debug\MyBlogSite.BusinessLayer.pdb

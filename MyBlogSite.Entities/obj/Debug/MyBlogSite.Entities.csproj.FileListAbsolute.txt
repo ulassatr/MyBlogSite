@@ -1,0 +1,6 @@
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.Entities\bin\Debug\MyBlogSite.Entities.dll
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.Entities\bin\Debug\MyBlogSite.Entities.pdb
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.csprojResolveAssemblyReference.cache
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.csproj.CoreCompileInputs.cache
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.dll
+C:\Users\ulassatr\source\repos\Blog02Solution\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.pdb
