@@ -10,6 +10,7 @@ namespace MyBlogSite.DataAccessLayer
 {
     public class DatabaseContext : DbContext
     {
+        //DbContext sınıfın özelliği, veritabanı üzerinde oturum (session) işlemlerini gerçekleştirip oluşturulan oturumlar üzerinden işlemlerin yapılmasını sağlar.
 
         public DbSet<BlogSiteUser> BlogSiteUsers { get; set; }
         public DbSet<Note> Notes { get; set; }
@@ -17,7 +18,10 @@ namespace MyBlogSite.DataAccessLayer
         public DbSet<Category> Categories { get; set; }
         public DbSet<Liked> Likes { get; set; }
 
-
+        public DatabaseContext()
+        {
+            Database.SetInitializer(new Initializer());
+        }
 
     }
 }

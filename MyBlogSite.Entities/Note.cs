@@ -27,5 +27,13 @@ namespace MyBlogSite.Entities
         public virtual List<Comment> Comments { get; set; }
         public virtual Category Category { get; set; }
         public virtual List<Liked> Likes { get; set; }
+
+        //Null hatası almamak için listeyi oluşturuyoruz.
+        public Note()
+        {
+            Comments = new List<Comment>();
+            Likes = new List<Liked>();
+
+        }
     }
 }

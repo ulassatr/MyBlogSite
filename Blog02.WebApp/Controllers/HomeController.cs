@@ -12,7 +12,7 @@ namespace Blog02.WebApp.Controllers
         public ActionResult Index()
         {
             MyBlogSite.BusinessLayer.Test test = new MyBlogSite.BusinessLayer.Test();
-
+            test.InsertTest();
             return View();
         }
     }

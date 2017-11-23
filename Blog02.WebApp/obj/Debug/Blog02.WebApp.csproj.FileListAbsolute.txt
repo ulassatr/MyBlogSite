@@ -38,3 +38,5 @@ C:\Users\ulassatr\source\repos\Blog02Solution\Blog02.WebApp\bin\EntityFramework.
 C:\Users\ulassatr\source\repos\Blog02Solution\Blog02.WebApp\bin\EntityFramework.SqlServer.xml
 C:\Users\ulassatr\source\repos\Blog02Solution\Blog02.WebApp\bin\MyBlogSite.DataAccessLayer.pdb
 C:\Users\ulassatr\source\repos\Blog02Solution\Blog02.WebApp\bin\MyBlogSite.DataAccessLayer.dll.config
+C:\Users\ulassatr\source\repos\Blog02Solution\Blog02.WebApp\bin\FakeData.dll
+C:\Users\ulassatr\source\repos\Blog02Solution\Blog02.WebApp\bin\FakeData.pdb

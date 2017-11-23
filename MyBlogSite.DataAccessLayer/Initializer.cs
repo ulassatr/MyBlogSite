@@ -46,7 +46,28 @@ namespace MyBlogSite.DataAccessLayer
             context.BlogSiteUsers.Add(admin);
             context.BlogSiteUsers.Add(standartUser);
 
+            for (int i = 0; i < 8; i++)
+            {
+                BlogSiteUser User = new BlogSiteUser()
+                {
+                    Name = FakeData.NameData.GetFirstName(),
+                    Surname =FakeData.NameData.GetSurname(),
+                    Email = FakeData.NetworkData.GetEmail(),
+                    ActivateGuid = Guid.NewGuid(),
+                    IsActive = true,
+                    IsAdmin = false,
+                    Username = $"user{i}",
+                    Password = "123",
+                    CreatedOn = FakeData.DateTimeData.GetDatetime(DateTime.Now.AddYears(-1), DateTime.Now),
+                    ModifiedOn = FakeData.DateTimeData.GetDatetime(DateTime.Now.AddYears(-1), DateTime.Now),
+                    ModifiedUserName = $"user{i}"
+                };
+                context.BlogSiteUsers.Add(User);
+            }
+
             context.SaveChanges();
+
+            List<BlogSiteUser> userList = context.BlogSiteUsers.ToList();
 
             //Adding fake categories
             for (int i = 0; i < 10; i++)
@@ -61,27 +82,58 @@ namespace MyBlogSite.DataAccessLayer
                     ModifiedUserName = "ulassatr"
 
                 };
+                context.Categories.Add(cat);
 
                 for (int k = 0; k < FakeData.NumberData.GetNumber(5,9); k++)
                 {
+                    BlogSiteUser owner = userList[FakeData.NumberData.GetNumber(0, userList.Count - 1)];
                     Note note = new Note()
                     {
                         Title = FakeData.TextData.GetAlphabetical(FakeData.NumberData.GetNumber(5, 25)),
                         Text = FakeData.TextData.GetSentences(FakeData.NumberData.GetNumber(1, 3)),
                         Category = cat,
                         IsDraft = false,
-                        LikeCount = FakeData.NumberData.GetNumber(10, 50),
-                        Owner = (k % 2 == 0) ? admin : standartUser,
+                        LikeCount = FakeData.NumberData.GetNumber(1, 9),
+                        Owner = owner,
                         CreatedOn = FakeData.DateTimeData.GetDatetime(DateTime.Now.AddYears(-1), DateTime.Now),
                         ModifiedOn = FakeData.DateTimeData.GetDatetime(DateTime.Now.AddYears(-1), DateTime.Now),
-                        ModifiedUserName = (k % 2 == 0) ? admin.Username : standartUser.Username,
+                        ModifiedUserName = owner.Username,
 
                     };
                     cat.Notes.Add(note);
-                        
+
+                    //Adding fake comments
+                    for (int j = 0; j < FakeData.NumberData.GetNumber(3,5); j++)
+                    {
+                        BlogSiteUser owner_comment = userList[FakeData.NumberData.GetNumber(0, userList.Count - 1)];
+                        Comment comment = new Comment()
+                        {
+                            Text = FakeData.TextData.GetSentence(),
+                            Owner = owner_comment,
+                            CreatedOn = FakeData.DateTimeData.GetDatetime(DateTime.Now.AddYears(-1), DateTime.Now),
+                            ModifiedOn = FakeData.DateTimeData.GetDatetime(DateTime.Now.AddYears(-1), DateTime.Now),
+                            ModifiedUserName = owner_comment.Username,
+
+                        };
+
+                        //Note un commentlerine ekliyoruz
+                        note.Comments.Add(comment);
+                    }
+                    
+                    //Adding fake likes
+                    for (int m = 0; m < note.LikeCount; m++)
+                    {
+                        Liked liked = new Liked()
+                        {
+                            LikedUser = userList[m]
+
+                        };
+                        note.Likes.Add(liked);
+                    }
                 }
             }
 
+            context.SaveChanges(); 
         }
 
 
