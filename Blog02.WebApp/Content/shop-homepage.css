@@ -22,7 +22,7 @@ body {
 }
 
 .caption {
-    height: 145px;
+    height: 190px;
     overflow: hidden;
 }
 
@@ -30,7 +30,7 @@ body {
     white-space: nowrap;
 }
 .thumbnail {
-   height:340px;
+   height:385px;
 }
 
 .thumbnail img {
