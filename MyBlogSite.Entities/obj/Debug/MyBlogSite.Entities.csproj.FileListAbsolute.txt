@@ -10,3 +10,9 @@ E:\GithubRepo\MyBlogSite\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.cspro
 E:\GithubRepo\MyBlogSite\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.csproj.CoreCompileInputs.cache
 E:\GithubRepo\MyBlogSite\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.dll
 E:\GithubRepo\MyBlogSite\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.pdb
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Entities\bin\Debug\MyBlogSite.Entities.dll
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Entities\bin\Debug\MyBlogSite.Entities.pdb
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.csprojResolveAssemblyReference.cache
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.csproj.CoreCompileInputs.cache
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.dll
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.pdb

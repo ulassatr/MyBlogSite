@@ -1,4 +1,5 @@
-﻿using MyBlogSite.Entities;
+﻿using MyBlogSite.DataAccessLayer.EntityFramework;
+using MyBlogSite.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
