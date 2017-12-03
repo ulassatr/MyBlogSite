@@ -1,4 +1,5 @@
-﻿using MyBlogSite.DataAccessLayer;
+﻿using MyBlogSite.Common;
+using MyBlogSite.DataAccessLayer;
 using MyBlogSite.Entities;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,8 @@ namespace MyBlogSite.DataAccessLayer.EntityFramework
 
                 o.CreatedOn = now;
                 o.ModifiedOn = now;
-                o.ModifiedUserName = "system";
+                o.ModifiedUserName = App.Common.GetCurrentUsername();
+              //  o.ModifiedUserName = "asd";
 
             }
             return Save();
@@ -56,7 +58,8 @@ namespace MyBlogSite.DataAccessLayer.EntityFramework
                 EntitiyBase o = obj as EntitiyBase;         
                                
                 o.ModifiedOn = DateTime.Now;
-                o.ModifiedUserName = "system";
+                o.ModifiedUserName = App.Common.GetCurrentUsername();
+              //  o.ModifiedUserName = "asd";
 
             }
             return Save();

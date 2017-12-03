@@ -61,6 +61,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyBlogSite.Common\MyBlogSite.Common.csproj">
+      <Project>{63744a69-e8ee-40a5-b5b1-ed9c5ac734eb}</Project>
+      <Name>MyBlogSite.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyBlogSite.Entities\MyBlogSite.Entities.csproj">
       <Project>{e7c18b27-4ffc-4cc2-aabe-5e94fb3933c7}</Project>
       <Name>MyBlogSite.Entities</Name>
