@@ -1,7 +1,9 @@
-﻿using MyBlogSite.DataAccessLayer.EntityFramework;
+﻿using MyBlogSite.Common.Helper;
+using MyBlogSite.DataAccessLayer.EntityFramework;
 using MyBlogSite.Entities;
 using MyBlogSite.Entities.Messages;
 using MyBlogSite.Entities.ValueObject;
+using MyEvernote.Common.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MyBlogSite.BusinessLayer
 {
-    public class BlogSiteUserManager
+    public class BlogSiteUserManager    
     {
         private Repository<BlogSiteUser> repo_user = new Repository<BlogSiteUser>();
         public BusinessLayerResult<BlogSiteUser> RegisterUser(RegisterViewModel data)
@@ -44,16 +46,35 @@ namespace MyBlogSite.BusinessLayer
 
                 if (dbResult > 0)
                 {
-                    repo_user.Find(x => x.Username == data.Username && x.Email == data.Email);
+                  res.Result=  repo_user.Find(x => x.Username == data.Username && x.Email == data.Email);
 
 
                     //Aktivasyon maili atılacak
                     //layerResult.Result.ActivateGuid
+
+                    string siteUri = ConfigHelper.Get<string>("SiteRootUri");
+                    string activateUri = $"{siteUri}/Home/UserActive/{res.Result.ActivateGuid}";
+                    string body = $"Merhaba {res.Result.Username};<br><br>Hesabınızı aktifleştirmek için <a href='{activateUri}' target='_blank'>tıklayınız</a>.";
+
+
+                    MailHelper.SendMail(body, res.Result.Email, "Hesap Aktifleştirme");
                 }
             }
 
+            return res;
+        }
 
-                return res;
+        public BusinessLayerResult<BlogSiteUser> GetUserById(int id)
+        {
+            BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
+            res.Result = repo_user.Find(x => x.Id == id);
+
+            if(res.Result == null)
+            {
+                res.AddError(ErrorMessageCode.UserNotFound, "Kullanıcı bulunamadı");
+            }
+            return res;
+
         }
 
         public BusinessLayerResult<BlogSiteUser> LoginUser(LoginViewModel data)
@@ -78,6 +99,29 @@ namespace MyBlogSite.BusinessLayer
 
             return res;
 
+        }
+
+        public BusinessLayerResult<BlogSiteUser> ActivateUser(Guid activateId)
+        {
+            BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
+            res.Result = repo_user.Find(x => x.ActivateGuid == activateId);
+
+            if(res.Result !=null)
+            {
+
+                if (res.Result.IsActive)
+                {
+                    res.AddError(ErrorMessageCode.UserAlreadyActive, "Kullanıcı zaten aktif edilmiştir");
+                    return res;
+                }
+                res.Result.IsActive = true;
+                repo_user.Update(res.Result);
+            }
+            else
+            {
+                res.AddError(ErrorMessageCode.ActivateIdDoesNotExists, "Aktifleştirilecek kullanıcı bulunamadı");
+            }
+            return res;
         }
     }
 }

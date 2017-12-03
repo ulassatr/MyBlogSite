@@ -62,6 +62,37 @@ namespace Blog02.WebApp.Controllers
             return View();
         }
 
+        public ActionResult ShowProfile()
+        {
+            BlogSiteUser currentUser = Session["login"] as BlogSiteUser;
+
+            BlogSiteUserManager bum = new BlogSiteUserManager();
+            BusinessLayerResult<BlogSiteUser>  res = bum.GetUserById(currentUser.Id);
+
+            if (res.Errors.Count > 0)
+            {
+                //Kullanıcıyı hata ekranına yönlendirmek gerekiyor.
+            }
+            return View(res.Result);
+        }
+
+        public ActionResult EditProfile()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditProfile(BlogSiteUser user)
+        {
+
+            return View();
+        }
+
+        public ActionResult RemoveProfile()
+        {
+            return View();
+        }
+
         public ActionResult Login()
         {
             return View();
@@ -133,15 +164,42 @@ namespace Blog02.WebApp.Controllers
             return View();
         }
 
-        public ActionResult UserActive(Guid activate_id)
+        public ActionResult UserActive(Guid id)
         {
             //Kullanıcı aktivasyonu sağlanacak
+            BlogSiteUserManager bum = new BlogSiteUserManager();
+            BusinessLayerResult<BlogSiteUser> res = bum.ActivateUser(id);
+
+            if (res.Errors.Count > 0)
+            {
+                TempData["errors"] = res.Errors;
+                return RedirectToAction("UserActivateCancel");
+            }
+            return RedirectToAction("UserActiveOk");
+        }
+        public ActionResult UserActiveOk()
+        {          
+                       
             return View();
         }
 
+        public ActionResult UserActiveCancel()
+        {
+            List<ErrorMessageObj> error = null;
+            if (TempData["errors"] != null)
+            {
+                error = TempData["errors"] as List<ErrorMessageObj>;
+
+            }
+
+            return View(error);
+        }
+
+
         public ActionResult Logout()
         {
-            return View();
+            Session.Clear();
+            return RedirectToAction("Index");
         }
     }
 }

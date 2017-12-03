@@ -17,7 +17,7 @@ namespace Blog02.WebApp.init
                 return user.Username;
             }
 
-            return null;
+            return "system";
         }
     }
 }
