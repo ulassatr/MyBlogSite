@@ -4,3 +4,9 @@ C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\MyBlogSite.Common\ob
 C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\MyBlogSite.Common\obj\Debug\MyBlogSite.Common.csproj.CoreCompileInputs.cache
 C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\MyBlogSite.Common\obj\Debug\MyBlogSite.Common.dll
 C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\MyBlogSite.Common\obj\Debug\MyBlogSite.Common.pdb
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Common\bin\Debug\MyBlogSite.Common.dll
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Common\bin\Debug\MyBlogSite.Common.pdb
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Common\obj\Debug\MyBlogSite.Common.csprojResolveAssemblyReference.cache
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Common\obj\Debug\MyBlogSite.Common.csproj.CoreCompileInputs.cache
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Common\obj\Debug\MyBlogSite.Common.dll
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Common\obj\Debug\MyBlogSite.Common.pdb

@@ -72,3 +72,5 @@ C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\MyBlogSite.BusinessL
 C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\MyBlogSite.BusinessLayer\obj\Debug\MyBlogSite.BusinessLayer.csproj.CoreCompileInputs.cache
 C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\MyBlogSite.BusinessLayer\obj\Debug\MyBlogSite.BusinessLayer.dll
 C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\MyBlogSite.BusinessLayer\obj\Debug\MyBlogSite.BusinessLayer.pdb
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.BusinessLayer\bin\Debug\MyBlogSite.Common.dll
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.BusinessLayer\bin\Debug\MyBlogSite.Common.pdb

@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MyBlogSite.Entities.Messages;
+using Blog02.WebApp.ViewModels;
 
 namespace Blog02.WebApp.Controllers
 {
@@ -71,6 +72,13 @@ namespace Blog02.WebApp.Controllers
 
             if (res.Errors.Count > 0)
             {
+                ErrorViewModel ErrorNotifyObj = new ErrorViewModel()
+                {
+                    Title = "Hata Oluştu",
+                    Items = res.Errors
+                };
+
+                return View("Error", ErrorNotifyObj);
                 //Kullanıcıyı hata ekranına yönlendirmek gerekiyor.
             }
             return View(res.Result);
@@ -78,26 +86,96 @@ namespace Blog02.WebApp.Controllers
 
         public ActionResult EditProfile()
         {
-            return View();
+            BlogSiteUser currentUser = Session["login"] as BlogSiteUser;
+
+            BlogSiteUserManager bum = new BlogSiteUserManager();
+            BusinessLayerResult<BlogSiteUser> res = bum.GetUserById(currentUser.Id);
+
+            if (res.Errors.Count > 0)
+            {
+                ErrorViewModel ErrorNotifyObj = new ErrorViewModel()
+                {
+                    Title = "Hata Oluştu",
+                    Items = res.Errors
+                };
+
+                return View("Error", ErrorNotifyObj);
+                //Kullanıcıyı hata ekranına yönlendirmek gerekiyor.
+            }
+            return View(res.Result);
         }
 
         [HttpPost]
-        public ActionResult EditProfile(BlogSiteUser user)
+        public ActionResult EditProfile(BlogSiteUser model,HttpPostedFileBase ProfileImage)
         {
+            ModelState.Remove("ModifiedUsername");
 
-            return View();
+            if (ModelState.IsValid)
+            {
+                if (ProfileImage != null &&
+               (ProfileImage.ContentType == "image/jpeg" ||
+               ProfileImage.ContentType == "image/jpg" ||
+               ProfileImage.ContentType == "image/png"))
+                {
+                    string filename = $"user_{model.Id}.{ProfileImage.ContentType.Split('/')[1]}";
+
+                    ProfileImage.SaveAs(Server.MapPath($"~/images/{filename}"));
+                    model.ProfileImageFilename = filename;
+
+                }
+                BlogSiteUserManager bum = new BlogSiteUserManager();
+                BusinessLayerResult<BlogSiteUser> res = bum.UpdateProfile(model);
+
+                if (res.Errors.Count > 0)
+                {
+                    ErrorViewModel ErrorNotifyObj = new ErrorViewModel()
+                    {
+                        Items = res.Errors,
+                        Title = "Profil Güncellenmedi",
+                        RedirectingUrl = "/Home/EditProfile"
+
+                    };
+
+                    return View("Error", ErrorNotifyObj);
+                }
+
+                Session["login"] = res.Result; // Profil güncellendiği için session güncellendi.
+
+                return RedirectToAction("ShowProfile");
+
+            }
+
+            return View(model);
+
         }
 
-        public ActionResult RemoveProfile()
+        public ActionResult DeleteProfile()
         {
-            return View();
+            BlogSiteUser currentUser = Session["login"] as BlogSiteUser;
+
+            BlogSiteUserManager bum = new BlogSiteUserManager();
+            BusinessLayerResult<BlogSiteUser> res = bum.RemoveUserById(currentUser.Id);
+
+            if(res.Errors.Count > 0)
+            {
+                ErrorViewModel ErrorNotifyObj = new ErrorViewModel()
+                {
+                    Items = res.Errors,
+                    Title = "Profil silinemedi",
+                    RedirectingUrl = "/Home/ShowProfile"
+                };
+                return View("Error", ErrorNotifyObj);
+
+            }
+            Session.Clear();
+            return RedirectToAction("Index");
         }
 
         public ActionResult Login()
         {
             return View();
         }
-
+               
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
         {
@@ -143,6 +221,7 @@ namespace Blog02.WebApp.Controllers
 
             if (ModelState.IsValid)
             {
+               
                 BlogSiteUserManager bum = new BlogSiteUserManager();
                 BusinessLayerResult<BlogSiteUser> res = bum.RegisterUser(model);
 
@@ -152,16 +231,20 @@ namespace Blog02.WebApp.Controllers
                     res.Errors.ForEach(x => ModelState.AddModelError("", x.Message));
                     return View(model);
                 }
-                return RedirectToAction("RegisterOk");
+
+                OkViewModel notifyObj = new OkViewModel()
+                {
+
+                    Title="Kayıt Başarılı",
+                    RedirectingUrl="/Home/Login",
+                };
+                notifyObj.Items.Add("Lütfen e postanıza gönderdiğimiz aktivasyon linkine tıklayarak hesabıbızı aktif ediniz");
+
+                return View("Ok",notifyObj);
             }
 
 
             return View(model);
-        }
-
-        public ActionResult RegisterOk()
-        {
-            return View();
         }
 
         public ActionResult UserActive(Guid id)
@@ -172,27 +255,23 @@ namespace Blog02.WebApp.Controllers
 
             if (res.Errors.Count > 0)
             {
-                TempData["errors"] = res.Errors;
-                return RedirectToAction("UserActivateCancel");
+                ErrorViewModel ErrorNotifyObj = new ErrorViewModel()
+                {
+                    Title = "Geçersiz İşlem",
+                    Items = res.Errors
+                };
+            
+                return View("Error",ErrorNotifyObj);
             }
-            return RedirectToAction("UserActiveOk");
-        }
-        public ActionResult UserActiveOk()
-        {          
-                       
-            return View();
-        }
 
-        public ActionResult UserActiveCancel()
-        {
-            List<ErrorMessageObj> error = null;
-            if (TempData["errors"] != null)
+            OkViewModel OkNotifyObj = new OkViewModel()
             {
-                error = TempData["errors"] as List<ErrorMessageObj>;
+                Title = "Hesabınız aktifleştirildi.",
+                RedirectingUrl = "/Home/Login"
+            };
+            OkNotifyObj.Items.Add("Hesabınız aktifleştirildi.");
 
-            }
-
-            return View(error);
+            return View("Ok",OkNotifyObj);
         }
 
 

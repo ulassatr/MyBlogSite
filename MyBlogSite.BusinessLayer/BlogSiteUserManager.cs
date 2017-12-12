@@ -38,6 +38,7 @@ namespace MyBlogSite.BusinessLayer
                 {
                     Username = data.Username,
                     Email = data.Email,
+                    ProfileImageFilename="user.png",
                     Password = data.Password,
                     ActivateGuid = Guid.NewGuid(),
                     IsActive=false,
@@ -101,7 +102,7 @@ namespace MyBlogSite.BusinessLayer
 
         }
 
-        public BusinessLayerResult<BlogSiteUser> ActivateUser(Guid activateId)
+        public BusinessLayerResult<BlogSiteUser> ActivateUser(Guid activateId)  
         {
             BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
             res.Result = repo_user.Find(x => x.ActivateGuid == activateId);
@@ -120,6 +121,68 @@ namespace MyBlogSite.BusinessLayer
             else
             {
                 res.AddError(ErrorMessageCode.ActivateIdDoesNotExists, "Aktifleştirilecek kullanıcı bulunamadı");
+            }
+            return res;
+        }
+
+        public BusinessLayerResult<BlogSiteUser> UpdateProfile(BlogSiteUser data)
+        {
+            BlogSiteUser db_user =  repo_user.Find(x => x.Id != data.Id && (x.Username == data.Username || x.Email == data.Email)); 
+            BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
+
+            if (db_user != null && db_user.Id != data.Id)
+            {
+                if (db_user.Username == data.Username)
+                {
+                    res.AddError(ErrorMessageCode.UsernameAlreadyExists, "Kullanıcı adı kayıtlı.");
+                }
+
+                if (db_user.Email == data.Email)
+                {
+                    res.AddError(ErrorMessageCode.EmailAlreadyExists, "E-posta adresi kayıtlı.");
+                }
+
+                return res;
+            }   
+
+            res.Result = repo_user.Find(x => x.Id == data.Id);
+            res.Result.Email = data.Email;
+            res.Result.Name = data.Name;
+            res.Result.Surname = data.Surname;
+            res.Result.Password = data.Password;
+            res.Result.Username = data.Username;
+
+            if (string.IsNullOrEmpty(data.ProfileImageFilename) == false)
+            {
+                res.Result.ProfileImageFilename = data.ProfileImageFilename;
+            }
+
+            if (repo_user.Update(res.Result) == 0)
+            {
+                res.AddError(ErrorMessageCode.ProfileCouldNotUpdated, "Profil güncellenemedi.");
+            }
+
+            return res;
+        }
+
+        public BusinessLayerResult<BlogSiteUser> RemoveUserById(int id)
+        {
+            BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
+            BlogSiteUser user = repo_user.Find(x => x.Id == id);
+           
+
+            if (user != null)
+            {
+                if (repo_user.Delete(user) == 0)
+                {
+                    res.AddError(ErrorMessageCode.UserCouldNotRemove, "Kullanıcı silinemedi");
+                    return res;
+
+                }
+            }
+            else
+            {
+                res.AddError(ErrorMessageCode.UserCouldNotFind, "Kullanıcı Bulunamadı");
             }
             return res;
         }

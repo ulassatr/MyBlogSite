@@ -23,7 +23,7 @@ namespace MyBlogSite.DataAccessLayer.EntityFramework
         }
         public List<T> List()
         {
-           return _objectSet.ToList();
+          return _objectSet.ToList();
         }
         public IQueryable<T> ListQueryable()
         {
