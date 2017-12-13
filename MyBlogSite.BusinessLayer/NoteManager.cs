@@ -1,4 +1,4 @@
-﻿using MyBlogSite.BusinessLayer;
+﻿using MyBlogSite.BusinessLayer.Abstract;
 using MyBlogSite.DataAccessLayer.EntityFramework;
 using MyBlogSite.Entities;
 using System;
@@ -8,19 +8,8 @@ using System.Web;
 
 namespace MyBlogSite.BusinessLayer
 {
-    public class NoteManager
+    public class NoteManager : ManagerBase<Note>
     {
-        private Repository<Note> repo_note = new Repository<Note>();
-
-        public List<Note> GetAllNote()
-        {
-
-            return repo_note.List();
-        }
-        public IQueryable<Note> GetAllNoteQueryable()
-        {
-
-            return repo_note.ListQueryable();
-        }
+        
     }
 }

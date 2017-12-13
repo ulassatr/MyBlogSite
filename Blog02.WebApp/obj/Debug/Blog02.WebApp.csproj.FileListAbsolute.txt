@@ -170,3 +170,5 @@ C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\Blog02.WebApp\obj\De
 C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\Blog02.WebApp\obj\Debug\Blog02.WebApp.pdb
 C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\Blog02.WebApp\bin\MyBlogSite.Common.dll
 C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\Blog02.WebApp\bin\MyBlogSite.Common.pdb
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\Blog02.WebApp\bin\MyBlogSite.Core.dll
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\Blog02.WebApp\bin\MyBlogSite.Core.pdb

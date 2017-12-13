@@ -1,4 +1,6 @@
-﻿using MyBlogSite.Common.Helper;
+﻿using MyBlogSite.BusinessLayer.Abstract;
+using MyBlogSite.BusinessLayer.Results;
+using MyBlogSite.Common.Helper;
 using MyBlogSite.DataAccessLayer.EntityFramework;
 using MyBlogSite.Entities;
 using MyBlogSite.Entities.Messages;
@@ -12,12 +14,12 @@ using System.Threading.Tasks;
 
 namespace MyBlogSite.BusinessLayer
 {
-    public class BlogSiteUserManager    
+    public class BlogSiteUserManager  : ManagerBase<BlogSiteUser>
     {
-        private Repository<BlogSiteUser> repo_user = new Repository<BlogSiteUser>();
+    
         public BusinessLayerResult<BlogSiteUser> RegisterUser(RegisterViewModel data)
         {
-            BlogSiteUser user = repo_user.Find(x => x.Username == data.Username || x.Email == data.Email);
+            BlogSiteUser user = Find(x => x.Username == data.Username || x.Email == data.Email);
             BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
 
             if (user != null)
@@ -34,7 +36,7 @@ namespace MyBlogSite.BusinessLayer
             }
             else
             {
-             int dbResult = repo_user.Insert(new BlogSiteUser()
+             int dbResult = Insert(new BlogSiteUser()
                 {
                     Username = data.Username,
                     Email = data.Email,
@@ -47,7 +49,7 @@ namespace MyBlogSite.BusinessLayer
 
                 if (dbResult > 0)
                 {
-                  res.Result=  repo_user.Find(x => x.Username == data.Username && x.Email == data.Email);
+                  res.Result= Find(x => x.Username == data.Username && x.Email == data.Email);
 
 
                     //Aktivasyon maili atılacak
@@ -68,7 +70,7 @@ namespace MyBlogSite.BusinessLayer
         public BusinessLayerResult<BlogSiteUser> GetUserById(int id)
         {
             BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
-            res.Result = repo_user.Find(x => x.Id == id);
+            res.Result =Find(x => x.Id == id);
 
             if(res.Result == null)
             {
@@ -81,7 +83,7 @@ namespace MyBlogSite.BusinessLayer
         public BusinessLayerResult<BlogSiteUser> LoginUser(LoginViewModel data)
         {
             BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
-            res.Result = repo_user.Find(x => x.Username == data.Username && x.Password == data.Password);
+            res.Result =Find(x => x.Username == data.Username && x.Password == data.Password);
             
 
             if(res.Result != null)
@@ -105,7 +107,7 @@ namespace MyBlogSite.BusinessLayer
         public BusinessLayerResult<BlogSiteUser> ActivateUser(Guid activateId)  
         {
             BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
-            res.Result = repo_user.Find(x => x.ActivateGuid == activateId);
+            res.Result = Find(x => x.ActivateGuid == activateId);
 
             if(res.Result !=null)
             {
@@ -116,7 +118,7 @@ namespace MyBlogSite.BusinessLayer
                     return res;
                 }
                 res.Result.IsActive = true;
-                repo_user.Update(res.Result);
+                Update(res.Result);
             }
             else
             {
@@ -127,7 +129,7 @@ namespace MyBlogSite.BusinessLayer
 
         public BusinessLayerResult<BlogSiteUser> UpdateProfile(BlogSiteUser data)
         {
-            BlogSiteUser db_user =  repo_user.Find(x => x.Id != data.Id && (x.Username == data.Username || x.Email == data.Email)); 
+            BlogSiteUser db_user = Find(x => x.Id != data.Id && (x.Username == data.Username || x.Email == data.Email)); 
             BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
 
             if (db_user != null && db_user.Id != data.Id)
@@ -145,7 +147,7 @@ namespace MyBlogSite.BusinessLayer
                 return res;
             }   
 
-            res.Result = repo_user.Find(x => x.Id == data.Id);
+            res.Result = Find(x => x.Id == data.Id);
             res.Result.Email = data.Email;
             res.Result.Name = data.Name;
             res.Result.Surname = data.Surname;
@@ -157,7 +159,7 @@ namespace MyBlogSite.BusinessLayer
                 res.Result.ProfileImageFilename = data.ProfileImageFilename;
             }
 
-            if (repo_user.Update(res.Result) == 0)
+            if (Update(res.Result) == 0)
             {
                 res.AddError(ErrorMessageCode.ProfileCouldNotUpdated, "Profil güncellenemedi.");
             }
@@ -168,12 +170,12 @@ namespace MyBlogSite.BusinessLayer
         public BusinessLayerResult<BlogSiteUser> RemoveUserById(int id)
         {
             BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
-            BlogSiteUser user = repo_user.Find(x => x.Id == id);
+            BlogSiteUser user = Find(x => x.Id == id);
            
 
             if (user != null)
             {
-                if (repo_user.Delete(user) == 0)
+                if (Delete(user) == 0)
                 {
                     res.AddError(ErrorMessageCode.UserCouldNotRemove, "Kullanıcı silinemedi");
                     return res;

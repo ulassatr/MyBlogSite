@@ -9,11 +9,15 @@ using System.Web;
 using System.Web.Mvc;
 using MyBlogSite.Entities.Messages;
 using Blog02.WebApp.ViewModels;
+using MyBlogSite.BusinessLayer.Results;
 
 namespace Blog02.WebApp.Controllers
 {
     public class HomeController : Controller
     {
+        private NoteManager noteManager = new NoteManager();
+        private CategoryManager categoryManager = new CategoryManager();
+        private BlogSiteUserManager blogSiteUserManager = new BlogSiteUserManager();
         // GET: Home
         public ActionResult Index()
         {
@@ -24,9 +28,9 @@ namespace Blog02.WebApp.Controllers
             //    return View(TempData["mm"] as List<Note>);
 
             //}
-            NoteManager nm = new NoteManager();
+            
 
-            return View(nm.GetAllNote().OrderByDescending(x => x.ModifiedOn).ToList());
+            return View(noteManager.ListQueryable().OrderByDescending(x => x.ModifiedOn).ToList());
             // return View(nm.GetAllNoteQueryable().OrderByDescending(x => x.ModifiedOn).ToList());
         }
 
@@ -36,8 +40,8 @@ namespace Blog02.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryManager cm = new CategoryManager();
-            Category cat = cm.GetCategoryById(id.Value);
+           
+            Category cat = categoryManager.Find(x=>x.Id==id.Value);
 
             if (cat == null)
             {
@@ -49,12 +53,10 @@ namespace Blog02.WebApp.Controllers
         }
 
         public ActionResult MostLiked()
-        {
-            NoteManager nm = new NoteManager();
-
+        {          
             //Her Action için farklı görünümler oluşturmaya gerek yok
             //Index sayfasına git asagidaki modeli dön
-            return View("Index", nm.GetAllNote().OrderByDescending(x => x.LikeCount).ToList());
+            return View("Index", noteManager.ListQueryable().OrderByDescending(x => x.LikeCount).ToList());
         }
 
         public ActionResult About()
@@ -67,8 +69,8 @@ namespace Blog02.WebApp.Controllers
         {
             BlogSiteUser currentUser = Session["login"] as BlogSiteUser;
 
-            BlogSiteUserManager bum = new BlogSiteUserManager();
-            BusinessLayerResult<BlogSiteUser>  res = bum.GetUserById(currentUser.Id);
+            
+            BusinessLayerResult<BlogSiteUser>  res = blogSiteUserManager.GetUserById(currentUser.Id);
 
             if (res.Errors.Count > 0)
             {
@@ -87,9 +89,8 @@ namespace Blog02.WebApp.Controllers
         public ActionResult EditProfile()
         {
             BlogSiteUser currentUser = Session["login"] as BlogSiteUser;
-
-            BlogSiteUserManager bum = new BlogSiteUserManager();
-            BusinessLayerResult<BlogSiteUser> res = bum.GetUserById(currentUser.Id);
+            
+            BusinessLayerResult<BlogSiteUser> res = blogSiteUserManager.GetUserById(currentUser.Id);
 
             if (res.Errors.Count > 0)
             {
@@ -123,8 +124,8 @@ namespace Blog02.WebApp.Controllers
                     model.ProfileImageFilename = filename;
 
                 }
-                BlogSiteUserManager bum = new BlogSiteUserManager();
-                BusinessLayerResult<BlogSiteUser> res = bum.UpdateProfile(model);
+                
+                BusinessLayerResult<BlogSiteUser> res = blogSiteUserManager.UpdateProfile(model);
 
                 if (res.Errors.Count > 0)
                 {
@@ -153,8 +154,8 @@ namespace Blog02.WebApp.Controllers
         {
             BlogSiteUser currentUser = Session["login"] as BlogSiteUser;
 
-            BlogSiteUserManager bum = new BlogSiteUserManager();
-            BusinessLayerResult<BlogSiteUser> res = bum.RemoveUserById(currentUser.Id);
+            
+            BusinessLayerResult<BlogSiteUser> res = blogSiteUserManager.RemoveUserById(currentUser.Id);
 
             if(res.Errors.Count > 0)
             {
@@ -181,8 +182,8 @@ namespace Blog02.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                BlogSiteUserManager bum = new BlogSiteUserManager();
-                BusinessLayerResult<BlogSiteUser> res = bum.LoginUser(model);
+               
+                BusinessLayerResult<BlogSiteUser> res = blogSiteUserManager.LoginUser(model);
 
                 
                 if (res.Errors.Count > 0)
@@ -222,8 +223,8 @@ namespace Blog02.WebApp.Controllers
             if (ModelState.IsValid)
             {
                
-                BlogSiteUserManager bum = new BlogSiteUserManager();
-                BusinessLayerResult<BlogSiteUser> res = bum.RegisterUser(model);
+           
+                BusinessLayerResult<BlogSiteUser> res = blogSiteUserManager.RegisterUser(model);
 
                 if (res.Errors.Count > 0)
                 {
@@ -250,8 +251,8 @@ namespace Blog02.WebApp.Controllers
         public ActionResult UserActive(Guid id)
         {
             //Kullanıcı aktivasyonu sağlanacak
-            BlogSiteUserManager bum = new BlogSiteUserManager();
-            BusinessLayerResult<BlogSiteUser> res = bum.ActivateUser(id);
+           
+            BusinessLayerResult<BlogSiteUser> res = blogSiteUserManager.ActivateUser(id);
 
             if (res.Errors.Count > 0)
             {

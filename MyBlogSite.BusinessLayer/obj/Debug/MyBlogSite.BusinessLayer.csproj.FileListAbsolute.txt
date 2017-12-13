@@ -74,3 +74,5 @@ C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\MyBlogSite.BusinessL
 C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\MyBlogSite.BusinessLayer\obj\Debug\MyBlogSite.BusinessLayer.pdb
 C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.BusinessLayer\bin\Debug\MyBlogSite.Common.dll
 C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.BusinessLayer\bin\Debug\MyBlogSite.Common.pdb
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.BusinessLayer\bin\Debug\MyBlogSite.Core.dll
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.BusinessLayer\bin\Debug\MyBlogSite.Core.pdb

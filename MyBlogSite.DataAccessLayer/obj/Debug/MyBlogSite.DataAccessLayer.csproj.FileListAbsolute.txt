@@ -62,3 +62,5 @@ C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\MyBlogSite.DataAcces
 C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\MyBlogSite.DataAccessLayer\obj\Debug\MyBlogSite.DataAccessLayer.pdb
 C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.DataAccessLayer\bin\Debug\MyBlogSite.Common.dll
 C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.DataAccessLayer\bin\Debug\MyBlogSite.Common.pdb
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.DataAccessLayer\bin\Debug\MyBlogSite.Core.dll
+C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.DataAccessLayer\bin\Debug\MyBlogSite.Core.pdb
