@@ -14,9 +14,11 @@ using System.Threading.Tasks;
 
 namespace MyBlogSite.BusinessLayer
 {
-    public class BlogSiteUserManager  : ManagerBase<BlogSiteUser>
+    public class BlogSiteUserManager : ManagerBase<BlogSiteUser>
     {
-    
+
+        //new anahtar kelimesi method gizlememize yardım eder.
+
         public BusinessLayerResult<BlogSiteUser> RegisterUser(RegisterViewModel data)
         {
             BlogSiteUser user = Find(x => x.Username == data.Username || x.Email == data.Email);
@@ -36,20 +38,20 @@ namespace MyBlogSite.BusinessLayer
             }
             else
             {
-             int dbResult = Insert(new BlogSiteUser()
+                int dbResult = base.Insert(new BlogSiteUser()
                 {
                     Username = data.Username,
                     Email = data.Email,
-                    ProfileImageFilename="user.png",
+                    ProfileImageFilename = "user.png",
                     Password = data.Password,
                     ActivateGuid = Guid.NewGuid(),
-                    IsActive=false,
-                    IsAdmin=false
+                    IsActive = false,
+                    IsAdmin = false
                 });
 
                 if (dbResult > 0)
                 {
-                  res.Result= Find(x => x.Username == data.Username && x.Email == data.Email);
+                    res.Result = Find(x => x.Username == data.Username && x.Email == data.Email);
 
 
                     //Aktivasyon maili atılacak
@@ -70,9 +72,9 @@ namespace MyBlogSite.BusinessLayer
         public BusinessLayerResult<BlogSiteUser> GetUserById(int id)
         {
             BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
-            res.Result =Find(x => x.Id == id);
+            res.Result = Find(x => x.Id == id);
 
-            if(res.Result == null)
+            if (res.Result == null)
             {
                 res.AddError(ErrorMessageCode.UserNotFound, "Kullanıcı bulunamadı");
             }
@@ -83,14 +85,14 @@ namespace MyBlogSite.BusinessLayer
         public BusinessLayerResult<BlogSiteUser> LoginUser(LoginViewModel data)
         {
             BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
-            res.Result =Find(x => x.Username == data.Username && x.Password == data.Password);
-            
+            res.Result = Find(x => x.Username == data.Username && x.Password == data.Password);
 
-            if(res.Result != null)
+
+            if (res.Result != null)
             {
                 if (!res.Result.IsActive)
                 {
-                    res.AddError(ErrorMessageCode.UserIsNotActive,"Kullanıcı Aktifleştirilmemiş");
+                    res.AddError(ErrorMessageCode.UserIsNotActive, "Kullanıcı Aktifleştirilmemiş");
                     res.AddError(ErrorMessageCode.CheckYourEmail, "Eposta adresinizi kontrol ediniz");
 
                 }
@@ -104,12 +106,12 @@ namespace MyBlogSite.BusinessLayer
 
         }
 
-        public BusinessLayerResult<BlogSiteUser> ActivateUser(Guid activateId)  
+        public BusinessLayerResult<BlogSiteUser> ActivateUser(Guid activateId)
         {
             BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
             res.Result = Find(x => x.ActivateGuid == activateId);
 
-            if(res.Result !=null)
+            if (res.Result != null)
             {
 
                 if (res.Result.IsActive)
@@ -129,7 +131,7 @@ namespace MyBlogSite.BusinessLayer
 
         public BusinessLayerResult<BlogSiteUser> UpdateProfile(BlogSiteUser data)
         {
-            BlogSiteUser db_user = Find(x => x.Id != data.Id && (x.Username == data.Username || x.Email == data.Email)); 
+            BlogSiteUser db_user = Find(x => x.Id != data.Id && (x.Username == data.Username || x.Email == data.Email));
             BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
 
             if (db_user != null && db_user.Id != data.Id)
@@ -145,7 +147,7 @@ namespace MyBlogSite.BusinessLayer
                 }
 
                 return res;
-            }   
+            }
 
             res.Result = Find(x => x.Id == data.Id);
             res.Result.Email = data.Email;
@@ -159,7 +161,7 @@ namespace MyBlogSite.BusinessLayer
                 res.Result.ProfileImageFilename = data.ProfileImageFilename;
             }
 
-            if (Update(res.Result) == 0)
+            if (base.Update(res.Result) == 0)
             {
                 res.AddError(ErrorMessageCode.ProfileCouldNotUpdated, "Profil güncellenemedi.");
             }
@@ -171,7 +173,7 @@ namespace MyBlogSite.BusinessLayer
         {
             BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
             BlogSiteUser user = Find(x => x.Id == id);
-           
+
 
             if (user != null)
             {
@@ -187,6 +189,85 @@ namespace MyBlogSite.BusinessLayer
                 res.AddError(ErrorMessageCode.UserCouldNotFind, "Kullanıcı Bulunamadı");
             }
             return res;
+        }
+
+        public new BusinessLayerResult<BlogSiteUser> Insert(BlogSiteUser data)
+        {
+            BlogSiteUser user = Find(x => x.Username == data.Username || x.Email == data.Email);
+            BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
+
+            res.Result = data;
+            if (user != null)
+            {
+                if (user.Username == data.Username)
+                {
+                    res.AddError(ErrorMessageCode.UsernameAlreadyExists, "Kullanıcı Adı kayıtlı");
+
+                }
+                if (user.Email == data.Email)
+                {
+                    res.AddError(ErrorMessageCode.EmailAlreadyExists, "Eposta kayıtlı");
+                }
+            }
+            else
+            {
+                res.Result.ProfileImageFilename = "user.png";
+                res.Result.ActivateGuid = Guid.NewGuid();
+
+                if (base.Insert(res.Result) == 0)
+                {
+                    res.AddError(ErrorMessageCode.UserCouldNotInserted, "Kullanıcı Eklenemedi");
+                }
+
+            }
+
+            return res;
+
+
+        }
+
+        public new BusinessLayerResult<BlogSiteUser> Update(BlogSiteUser data)
+        {
+
+            BlogSiteUser db_user = Find(x => x.Id != data.Id && (x.Username == data.Username || x.Email == data.Email));
+            BusinessLayerResult<BlogSiteUser> res = new BusinessLayerResult<BlogSiteUser>();
+
+            res.Result = data;
+
+
+            if (db_user != null && db_user.Id != data.Id)
+            {
+                if (db_user.Username == data.Username)
+                {
+                    res.AddError(ErrorMessageCode.UsernameAlreadyExists, "Kullanıcı adı kayıtlı.");
+                }
+
+                if (db_user.Email == data.Email)
+                {
+                    res.AddError(ErrorMessageCode.EmailAlreadyExists, "E-posta adresi kayıtlı.");
+                }
+
+                return res;
+            }
+
+            res.Result = Find(x => x.Id == data.Id);
+            res.Result.Email = data.Email;
+            res.Result.Name = data.Name;
+            res.Result.Surname = data.Surname;
+            res.Result.Password = data.Password;
+            res.Result.Username = data.Username;
+            res.Result.IsActive = data.IsActive;
+            res.Result.IsAdmin = data.IsAdmin;
+
+
+            if (base.Update(res.Result) == 0)
+            {
+                res.AddError(ErrorMessageCode.UserCouldNotUpdated, "Kullanıcı güncellenemedi.");
+            }
+
+            return res;
+
+
         }
     }
 }

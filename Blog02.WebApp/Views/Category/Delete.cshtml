@@ -1,11 +1,9 @@
-﻿@model MyBlogSite.Entities.Category
-
+﻿@using Blog02.WebApp
+@model MyBlogSite.Entities.Category
 @{
     ViewBag.Title = "Delete";
 }
-
 <h2>Delete</h2>
-
 <h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>Category</h4>
@@ -14,51 +12,43 @@
         <dt>
             @Html.DisplayNameFor(model => model.Title)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Title)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.CreatedOn)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.CreatedOn)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.ModifiedOn)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.ModifiedOn)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.ModifiedUserName)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.ModifiedUserName)
         </dd>
-
     </dl>
-
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+    <div class="form-actions no-color">
+     
+        @Bootstrap.Button("danger", string.Empty, "submit", "remove", " Delete")
+        @Bootstrap.LinkButton("/Category/Index", "default", string.Empty, string.Empty, "arrow-left", "Back to List")
+
+    </div>
     }
 </div>

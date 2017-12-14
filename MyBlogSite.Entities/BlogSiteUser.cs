@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace MyBlogSite.Entities
 {
+    //ScaffoldColumn kullanıcı eklenirken istediğimiz şeylerin üretilmemesini sağlar.
+
     [Table("BlogSiteUsers")]
     public class BlogSiteUser : EntitiyBase
     {
@@ -26,13 +28,13 @@ namespace MyBlogSite.Entities
         [Required, StringLength(25)]
         public string Password { get; set; }
 
-        [StringLength(30)] 
+        [StringLength(30), ScaffoldColumn(false)] 
         public string ProfileImageFilename { get; set; }
 
         public bool IsActive { get; set; }
         public bool IsAdmin { get; set; }
 
-        [Required]
+        [Required, ScaffoldColumn(false)]
         public Guid ActivateGuid { get; set; }
 
         

@@ -4,3 +4,9 @@ C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Core\obj\D
 C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Core\obj\Debug\MyBlogSite.Core.csproj.CoreCompileInputs.cache
 C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Core\obj\Debug\MyBlogSite.Core.dll
 C:\Users\ulass\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Core\obj\Debug\MyBlogSite.Core.pdb
+C:\Users\fbula\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Core\bin\Debug\MyBlogSite.Core.dll
+C:\Users\fbula\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Core\bin\Debug\MyBlogSite.Core.pdb
+C:\Users\fbula\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Core\obj\Debug\MyBlogSite.Core.csprojResolveAssemblyReference.cache
+C:\Users\fbula\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Core\obj\Debug\MyBlogSite.Core.csproj.CoreCompileInputs.cache
+C:\Users\fbula\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Core\obj\Debug\MyBlogSite.Core.dll
+C:\Users\fbula\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Core\obj\Debug\MyBlogSite.Core.pdb

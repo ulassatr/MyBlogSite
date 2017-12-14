@@ -56,23 +56,36 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="/Note/AddNew"><span class="glyphicon glyphicon-plus"></span>Not Ekle</a>
+                                    @Bootstrap.LinkMenu("/Note/Create", "plus", "Not Ekle")
+                                    
                                 </li>
                                 <li role="separator" class="divider"></li>
                                 <li>
-                                    <a href="/Note/MyNotes"><span class="glyphicon glyphicon-th-list"></span>Notlarım</a>
+                                    @Bootstrap.LinkMenu("/Note/Index", "th-list", "Notlarım")
+                                  
                                 </li>
                                 <li>
-                                    <a href="/Note/MyLikedNotes"><span class="glyphicon glyphicon-heart"></span>Beğendiklerim</a>
+                                    @Bootstrap.LinkMenu("/Note/MyLikedNotes", "heart", "Beğendiklerim")
+                                   
                                 </li>
                                 @if (user.IsAdmin)
                                 {
                                     <li role="separator" class="divider"></li>
                                     <li>
-                                        <a href="/Category/Create"><span class="glyphicon glyphicon-plus"></span>Kategori Ekle</a>
+                                        @Bootstrap.LinkMenu("/Category/Create", "plus", "Kategori Ekle")
+
                                     </li>
                                     <li>
-                                        <a href="/Category/Index"><span class="glyphicon glyphicon-th-list"></span>Kategoriler</a>
+                                        @Bootstrap.LinkMenu("/Category/Index", "th-list", "Kategoriler")
+                                    </li>
+
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        @Bootstrap.LinkMenu("/BlogSiteUser/Create", "plus", "Kullanıcı Ekle")
+                                    </li>
+                                    <li>
+                                        @Bootstrap.LinkMenu("/BlogSiteUser/Index", "th-list", "Kullanıcılar")
+
                                     </li>
                                 }
                             </ul>
@@ -109,7 +122,7 @@
                         </li>
                     }
                     else
-                    {                      
+                    {
 
                         <li class="dropdown">
                             <a href="/Home/ShowProfile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -120,7 +133,7 @@
                                 <li role="separator" class="divider"></li>
                                 <li><a href="/Home/EditProfile"><span class="glyphicon glyphicon-edit"></span>Profili Düzenle</a></li>
                                 <li><a href="/Home/DeleteProfile" onclick="return confirm('Hesabınızı silmek istediğinize emin misiniz ?');"><span class="glyphicon glyphicon-trash"></span>Profili Sil</a></li>
-                             </ul>
+                            </ul>
                         </li>
 
                         <li>
@@ -137,7 +150,6 @@
     </nav>
     @* RenderBody seçilen sayfadaki html kodu alır ve buraya yerleştirir. *@
     @RenderBody()
-
     @RenderSection("footer", required: false)
 </body>
 </html>

@@ -22,3 +22,9 @@ C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\MyBlogSite.Entities\
 C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.csproj.CoreCompileInputs.cache
 C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.dll
 C:\Users\ulass\Desktop\MyBlogSite2-master\MyBlogSite-master\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.pdb
+C:\Users\fbula\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Entities\bin\Debug\MyBlogSite.Entities.dll
+C:\Users\fbula\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Entities\bin\Debug\MyBlogSite.Entities.pdb
+C:\Users\fbula\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.csprojResolveAssemblyReference.cache
+C:\Users\fbula\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.csproj.CoreCompileInputs.cache
+C:\Users\fbula\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.dll
+C:\Users\fbula\Desktop\MyBlogSite-master\MyBlogSite-master\MyBlogSite.Entities\obj\Debug\MyBlogSite.Entities.pdb
